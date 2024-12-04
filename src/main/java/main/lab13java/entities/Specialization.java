@@ -21,10 +21,13 @@ public class Specialization {
     @Column(name = "number", nullable = false)
     private Integer number;
 
-    @Column(name = "number_of_students", nullable = false)
-    private Integer number_of_students;
+    @Column(name = "number_of_students")
+    private Integer numberOfStudents;
 
-    @Column(name = "name", nullable = false, length = 30)
+    @Column(name = "name", nullable = false, length = 150)
     private String name;
+
+    @Column(name = "description", nullable = false, length = 300)
+    private String description;
 
 }

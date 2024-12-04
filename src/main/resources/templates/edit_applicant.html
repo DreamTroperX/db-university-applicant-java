@@ -2,28 +2,24 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Edit applicant</title>
+    <title>Абітурієнт</title>
     <link rel="stylesheet" th:href="@{/webjars/bootstrap/5.3.0-alpha2/dist/css/bootstrap.css}">
 </head>
 <body>
-<h1>Edit applicant</h1>
+<h1>Редагувати абітурієнта</h1>
 <form action="update_applicant" method="post">
     <input type="hidden" name="id" th:value="${applicant.id}">
-    <label for="aname" class="form-control-sm">Name</label><br/>
+    <label for="aname" class="form-control-sm">ПІБ</label><br/>
     <input type="text" th:value="${applicant.name}" id="aname" name="aname" class="form-control-sm"><br/>
-    <label for="alastname" class="form-control-sm">Lastname</label><br/>
-    <input type="text" th:value="${applicant.lastname}" id="alastname" name="alastname" class="form-control-sm"><br/>
-    <label for="amiddlename" class="form-control-sm">Middle name</label><br/>
-    <input type="text" th:value="${applicant.middlename}" id="amiddlename" name="amiddlename" class="form-control-sm"><br/>
-    <label for="abirthdate" class="form-control-sm">Birth date</label><br/>
+    <label for="abirthdate" class="form-control-sm">Дата народження</label><br/>
     <input type="date" th:value="${applicant.birthdate}" id="abirthdate" name="abirthdate" class="form-control-sm"><br/>
-    <label for="atelephonenumber" class="form-control-sm">Telephone number</label><br/>
+    <label for="atelephonenumber" class="form-control-sm">Номер телефону</label><br/>
     <input type="number" th:value="${applicant.telephonenumber}" id="atelephonenumber" name="atelephonenumber" class="form-control-sm"><br/>
-    <label for="amiddleZNO" class="form-control-sm">Middle ZNO mark</label><br/>
+    <label for="amiddleZNO" class="form-control-sm">Середній бал ЗНО</label><br/>
     <input type="number" step="0.1" th:value="${applicant.middleZNO}" id="amiddleZNO" name="amiddleZNO" class="form-control-sm"><br/>
-    <label for="amiddle_school" class="form-control-sm">Telephone number</label><br/>
+    <label for="amiddle_school" class="form-control-sm">Середній бал атестату</label><br/>
     <input type="number" step="0.1" th:value="${applicant.middleSchool}" id="amiddle_school" name="amiddle_school" class="form-control-sm"><br/>
-    <button type="submit" class="btn btn-outline-primary">Update</button>
+    <button type="submit" class="btn btn-outline-primary">Оновити</button>
 </form>
 <script th:src="@{/webjars/jquery/3.6.4/dist/jquery.js}"></script>
 <script th:src="@{/webjars/popperjs__core/2.11.7/dist/umd/popper.js}"></script>

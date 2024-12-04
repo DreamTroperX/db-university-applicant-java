@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Екзамени</title>
+  <link rel="stylesheet" th:href="@{/webjars/bootstrap/5.3.0-alpha2/dist/css/bootstrap.css}">
+</head>
+<body>
+<h1 th:text="|Екзамени спеціальності|"></h1>
+<table class="table table-striped table-sm table-hover">
+  <thead class="table-dark">
+  <tr>
+    <th>#</th>
+    <th>Назва спеціальності</th>
+    <th>Номер спеціальності</th>
+    <th>Предмет</th>
+    <th>Прохідний бал</th>
+    <th>Час</th>
+    <th>Адреса</th>
+    <th>Дата</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr th:each="a : ${admisionExamSpecializations}" >
+    <td th:text="${a.id}"></td>
+    <td th:text="${a.idSpecialization.name}"></td>
+    <td th:text="${a.idSpecialization.number}"></td>
+    <td th:text="${a.idAdmisionExam.subject}"></td>
+    <td th:text="${a.idAdmisionExam.passingMark}"></td>
+    <td th:text="${a.idAdmisionExam.time}"></td>
+    <td th:text="${a.idAdmisionExam.adress}"></td>
+    <td th:text="${a.idAdmisionExam.date}"></td>
+  </tr>
+  </tbody>
+</table>
+</body>
+</html>

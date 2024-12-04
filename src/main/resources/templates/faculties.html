@@ -2,20 +2,22 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>NLU Faculties</title>
+    <title>НПУ факультети</title>
     <link rel="stylesheet" th:href="@{/webjars/bootstrap/5.3.0-alpha2/dist/css/bootstrap.css}">
 </head>
 <body>
-<h1 th:text="|All Faculties|"></h1>
+<h1 th:text="|Усі факультети|"></h1>
 <table class="table table-sm table-hover .table-striped-columns">
     <thead class="table-dark">
     <tr>
         <th>#</th>
-        <th>Name</th>
-        <th>Name of Dean</th>
-        <th>number of Students</th>
-        <th>number of Teachers</th>
-        <th>Specializations</th>
+        <th>Назва</th>
+        <th>ПІБ Декана</th>
+        <th>Число студентів</th>
+        <th>Число викладачів</th>
+        <th>X</th>
+        <th>Спеціальності</th>
+        <th>Редагувати</th>
     </tr>
     </thead>
     <tbody>
@@ -25,9 +27,59 @@
         <td th:text="${f.deanName}"></td>
         <td th:text="${f.numberOfStudents}"></td>
         <td th:text="${f.numberOfTeachers}"></td>
-        <td><a th:href="@{/specializations(id=${f.id})}" class="btn btn-outline-dark">View</a></td>
+        <td>
+            <a class="btn btn-outline-danger" data-bs-toggle="modal"
+               data-bs-target="#myconfirm"
+               th:attr="data-bs-link=@{/delete_faculty(id=${f.id})}, data-bs-text=${f.name}, data-bs-id=${f.id}">Видалити</a>
+        </td>
+        <td><a th:href="@{/specializations(id=${f.id})}" class="btn btn-outline-dark">Переглянути</a></td>
+        <td><a th:href="@{/edit_faculty(id=${f.id})}" class="btn btn-sm btn-outline-dark">Змінити</a></td>
     </tr>
     </tbody>
 </table>
+<div class="modal fade" id="myconfirm" data-bs-backdrop="static" data-bs-keyboard="false"
+     tabindex="-1" aria-labelledby="staticWarningLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="staticWarningLabel">Увага</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                Ви впевнені що хочете видалити факультет?<br/>
+                Якщо ви нажмете видалити, дію <i>не можна буде відмінити</i>.
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                    Відмінити
+                </button>
+                <a class="btn btn-danger delete-button">Delete</a>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    var myConfirmModal = document.getElementById('myconfirm')
+    myConfirmModal.addEventListener('show.bs.modal', function (event) {
+        var button = event.relatedTarget
+        var link = button.getAttribute('data-bs-link')
+        var tid = button.getAttribute('data-bs-id')
+        var text = button.getAttribute('data-bs-text')
+        var modalTitle = myConfirmModal.querySelector('.modal-title')
+        modalTitle.textContent = 'Deleting applicant: ' + text + ' (' + tid + ')'
+        var deleteButton = myConfirmModal.querySelector('.delete-button')
+        deleteButton.setAttribute("href", link)
+    })
+</script>
+<form action="add_faculty" method="post">
+    <input type="text" name="name" placeholder="Назва" class=" form-sm form-control placeholder-glow">
+    <input type="text" name="description" placeholder="Опис" class="form-control form-sm">
+    <input type="text" name="deanName" placeholder="ПІБ декану" class="form form-sm form-control placeholder-glow">
+    <input type="number" name="numberOfStudents" placeholder="Число студентів" class="form-sm form-control placeholder-glow">
+    <input type="number"  name="numberOfTeachers" placeholder="Число викладачів" class="form-sm form-control placeholder-glow">
+    <button type="submit" class="btn btn-outline-dark">
+        Додати
+    </button>
+</form>
 </body>
 </html>

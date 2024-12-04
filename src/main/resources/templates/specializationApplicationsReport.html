@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Спеціальності - Звіт</title>
+  <link rel="stylesheet" th:href="@{/webjars/bootstrap/5.3.0-alpha2/dist/css/bootstrap.css}">
+</head>
+<body>
+<h1 th:text="|Спеціальності - Звіт|"></h1>
+<table>
+  <thead>
+  <tr>
+    <th>Назва спеціальності</th>
+    <th>Кількість поданих заяв</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr th:each="row : ${specializationApplications}">
+    <td th:text="${row[0]}"></td>
+    <td th:text="${row[1]}"></td>
+  </tr>
+  </tbody>
+</table>
+</body>
+</html>

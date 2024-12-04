@@ -14,16 +14,19 @@ public class Faculty {
     @Column(name = "id", nullable = false)
     private Integer id;
 
-    @Column(name = "name", nullable = false, length = 30)
+    @Column(name = "name", nullable = false, length = 150)
     private String name;
 
-    @Column(name = "deanName", nullable = false, length = 60)
+    @Column(name = "description", nullable = false, length = 300)
+    private String description;
+
+    @Column(name = "dean_name", nullable = false, length = 150)
     private String deanName;
 
-    @Column(name = "numberOfStudents", nullable = false)
+    @Column(name = "number_of_students")
     private Integer numberOfStudents;
 
-    @Column(name = "numberOfTeachers", nullable = false)
+    @Column(name = "number_of_teachers")
     private Integer numberOfTeachers;
 
 }

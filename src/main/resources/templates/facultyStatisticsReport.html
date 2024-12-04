@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Статистика за факультетом - Звіт</title>
+  <link rel="stylesheet" th:href="@{/webjars/bootstrap/5.3.0-alpha2/dist/css/bootstrap.css}">
+</head>
+<body>
+<h1 th:text="|Статистика за факультетом - Звіт|"></h1>
+<table>
+  <thead>
+  <tr>
+    <th>Назва факультету</th>
+    <th>Кількість заяв</th>
+    <th>Кількість прийнятих заяв</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr th:each="row : ${facultyStatistics}">
+    <td th:text="${row[0]}"></td>
+    <td th:text="${row[1]}"></td>
+    <td th:text="${row[2]}"></td>
+  </tr>
+  </tbody>
+</table>
+</body>
+</html>

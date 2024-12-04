@@ -3,7 +3,6 @@ package main.lab13java.controllers;
 import lombok.AllArgsConstructor;
 import main.lab13java.dao.ApplicantRepository;
 import main.lab13java.entities.Applicant;
-import org.apache.coyote.Request;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,7 +15,7 @@ import java.util.Optional;
 
 @Controller
 @AllArgsConstructor
-public class ApplicantController {
+public class ApplicantController extends Applicant {
 
     private ApplicantRepository applicantRepository;
 
@@ -28,15 +27,13 @@ public class ApplicantController {
     }
 
     @PostMapping("/add_applicant")
-    public String addApplicant(@RequestParam String name, @RequestParam String lastname, @RequestParam String middlename, @RequestParam LocalDate birthdate, @RequestParam int telephonenumber, @RequestParam double middleZNO, @RequestParam double middle_school){
+    public String addApplicant(@RequestParam String name, @RequestParam LocalDate birthdate, @RequestParam int telephonenumber, @RequestParam double middleZNO, @RequestParam double middleSchool){
         Applicant applicant = new Applicant();
         applicant.setName(name);
-        applicant.setLastname(lastname);
-        applicant.setMiddlename(middlename);
         applicant.setBirthdate(birthdate);
         applicant.setTelephonenumber(telephonenumber);
         applicant.setMiddleZNO(middleZNO);
-        applicant.setMiddleSchool(middle_school);
+        applicant.setMiddleSchool(middleSchool);
         applicantRepository.save(applicant);
         return "redirect:/applicants";
     }
@@ -60,13 +57,11 @@ public class ApplicantController {
     }
 
     @PostMapping("/update_applicant")
-    public String editApplicant(@RequestParam int id, @RequestParam String aname, @RequestParam String alastname, @RequestParam String amiddlename, @RequestParam LocalDate abirthdate, @RequestParam int atelephonenumber, @RequestParam double amiddleZNO, @RequestParam double amiddle_school){
+    public String editApplicant(@RequestParam int id, @RequestParam String aname, @RequestParam LocalDate abirthdate, @RequestParam int atelephonenumber, @RequestParam double amiddleZNO, @RequestParam double amiddle_school){
         Optional<Applicant> optionalApplicant = applicantRepository.findById(id);
         if (optionalApplicant.isPresent()){
             Applicant a = optionalApplicant.get();
             a.setName(aname);
-            a.setLastname(alastname);
-            a.setMiddlename(amiddlename);
             a.setBirthdate(abirthdate);
             a.setTelephonenumber(atelephonenumber);
             a.setMiddleZNO(amiddleZNO);

@@ -2,40 +2,38 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="UTF-8">
-  <title>Абітурієнти</title>
+  <title>Екзамени</title>
   <link rel="stylesheet" th:href="@{/webjars/bootstrap/5.3.0-alpha2/dist/css/bootstrap.css}">
 </head>
 <body>
-<h1 th:text="|Усі абітурієнти|"></h1>
-<table class="table table-striped table-sm table-hover text-center .table-bordered">
+<h1 th:text="|Вступні екзамени|"></h1>
+<table class="table table-striped table-sm table-hover">
   <thead class="table-dark">
   <tr>
     <th>#</th>
-    <th>ПІБ</th>
-    <th>Дата народження</th>
-    <th>Номер телефону</th>
-    <th>Середній бал ЗНО</th>
-    <th>Середній бал атестату</th>
+    <th>Предмет</th>
+    <th>Прохідний бал</th>
+    <th>Час</th>
+    <th>Адреса</th>
+    <th>Дата</th>
     <th>X</th>
-    <th>Заяви</th>
     <th>Налаштування</th>
   </tr>
   </thead>
   <tbody>
-  <tr th:each="a : ${applicants}">
+  <tr th:each="a : ${admisionExams}" >
     <td th:text="${a.id}"></td>
-    <td th:text="${a.name}"></td>
-    <td th:text="${a.birthdate}"></td>
-    <td th:text="${a.telephonenumber}"></td>
-    <td th:text="${a.middleZNO}"></td>
-    <td th:text="${a.middleSchool}"></td>
+    <td th:text="${a.subject}"></td>
+    <td th:text="${a.passingMark}"></td>
+    <td th:text="${a.time}"></td>
+    <td th:text="${a.adress}"></td>
+    <td th:text="${a.date}"></td>
     <td>
       <a class="btn btn-outline-danger" data-bs-toggle="modal"
          data-bs-target="#myconfirm"
-         th:attr="data-bs-link=@{/delete_applicant(id=${a.id})}, data-bs-text=${a.name}, data-bs-id=${a.id}">Видалити</a>
+         th:attr="data-bs-link=@{/delete_admision_exam(id=${a.id})}, data-bs-text=${a.subject}, data-bs-id=${a.id}">Видалити</a>
     </td>
-    <td><a th:href="@{/application(id=${a.id})}" class="btn btn-sm btn-outline-dark">Переглянути</a></td>
-    <td><a th:href="@{/edit_applicant(id=${a.id})}" class="btn btn-sm btn-outline-dark">Змінити</a></td>
+    <td><a th:href="@{/edit_admision_exam(id=${a.id})}" class="btn btn-sm btn-outline-dark">Змінити</a></td>
   </tr>
   </tbody>
 </table>
@@ -48,12 +46,12 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        Ви впевнені що хочете видалити абітурієнта?<br/>
+        Ви впевнені що хочете видалити вступний екзамен?<br/>
         Якщо ви нажмете видалити, дію <i>не можна буде відмінити</i>.
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
-          Відмінити
+          Cancel
         </button>
         <a class="btn btn-danger delete-button">Delete</a>
       </div>
@@ -73,12 +71,12 @@
     deleteButton.setAttribute("href", link)
   })
 </script>
-<form action="add_applicant" method="post">
-  <input type="text" name="name" placeholder="ПІБ" class=" form-sm form-control placeholder-glow">
-  <input type="date" name="birthdate" class="form-control form-sm">
-  <input type="number" name="telephonenumber" placeholder="Номер телефону" class="form form-sm form-control placeholder-glow">
-  <input type="number" step="0.1" name="middleZNO" placeholder="Середній бал ЗНО" class="form-sm form-control placeholder-glow">
-  <input type="number" step="0.1" name="middleSchool" placeholder="Середній бал атестату" class="form-sm form-control placeholder-glow">
+<form action="add_admision_exam" method="post">
+  <input type="text" name="subject" placeholder="Предмет" class=" form-sm form-control placeholder-glow">
+  <input type="number" name="passingMark" placeholder="Прохідний бал" class="form-control form-sm">
+  <input type="time" name="time" class="form form-sm form-control placeholder-glow">
+  <input type="text" name="adress" placeholder="Адреса" class="form-sm form-control placeholder-glow">
+  <input type="date" name="date" class="form-sm form-control placeholder-glow">
   <button type="submit" class="btn btn-outline-dark">
     Додати
   </button>
